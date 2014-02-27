@@ -7,9 +7,9 @@
   {
     'label': 'Packages'
     'submenu': [
-      'label': 'gist'
+      'label': 'Gist It'
       'submenu': [
-        { 'label': 'Toggle', 'command': 'gist:toggle' }
+        { 'label': 'Gist Current File', 'command': 'gist:toggle' }
       ]
     ]
   }
