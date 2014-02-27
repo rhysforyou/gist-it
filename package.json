@@ -1,15 +1,16 @@
 {
   "name": "Gist It",
   "main": "./lib/gist",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": true,
   "description": "Quickly and easily share your code on gist.github.com",
-  "activationEvents": ["gist:toggle"],
+  "activationEvents": [
+    "gist:toggle"
+  ],
   "repository": "https://github.com/rpowelll/gist-it",
   "license": "MIT",
   "engines": {
     "atom": ">0.50.0"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
