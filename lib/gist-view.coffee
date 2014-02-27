@@ -26,7 +26,7 @@ class GistView extends View
   initialize: (serializeState) ->
     @handleEvents()
     @public = true
-    atom.workspaceView.command "gist:toggle", => @toggle()
+    atom.workspaceView.command "gist:gist-current-file", => @toggle()
 
   # Returns an object that can be retrieved when package is activated
   serialize: ->
