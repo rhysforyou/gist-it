@@ -20,7 +20,7 @@ From the package's page in Atom's settings, you can set a few preferences:
   _public_. you can change this option manually when creating the gist, or
   set it to instead default to _private_ by enabling this option.
 
-- _User Token (String):_ This field allows the user to enter a custom generated OAuth
-  token to have Gists attributed to their GitHub account. A token can be
-  created [here](https://github.com/settings/tokens/new) and must include
-  the `gist` scope.
+- _User Token (String):_ This field allows the user to enter a custom generated
+  OAuth token to have Gists attributed to their GitHub account. A token can be
+  created [here](https://github.com/settings/tokens/new) and must include the
+  `gist` scope.
