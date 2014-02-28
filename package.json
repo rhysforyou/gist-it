@@ -1,7 +1,7 @@
 {
   "name": "Gist It",
   "main": "./lib/gist",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "private": true,
   "description": "Quickly and easily share your code on gist.github.com",
   "activationEvents": [
