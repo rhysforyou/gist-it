@@ -1,5 +1,5 @@
 {
-  "name": "Gist It",
+  "name": "gist-it",
   "main": "./lib/gist",
   "version": "0.2.0",
   "private": true,
