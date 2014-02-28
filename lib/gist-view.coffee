@@ -37,6 +37,8 @@ class GistView extends View
 
   handleEvents: ->
     @gistButton.on 'click', => @gistIt()
+    @publicButton.on 'click', => @makePublic()
+    @privateButton.on 'click', => @makePrivate()
     @descriptionEditor.on 'core:confirm', => @gistIt()
     @descriptionEditor.on 'core:cancel', => @detach()
 
@@ -48,12 +50,14 @@ class GistView extends View
       atom.workspaceView.append(this)
       @descriptionEditor.setText ""
       @descriptionEditor.focus()
+      @makePublic()
 
   gistIt: ->
     @showProgressIndicator()
 
     parameters =
       description: @descriptionEditor.getText()
+      public: @public
       files: {}
 
     activeEditor = atom.workspaceView.getActivePaneItem()
@@ -70,9 +74,14 @@ class GistView extends View
 
 
   makePublic: ->
+    debugger
+    @publicButton.addClass('selected')
+    @privateButton.removeClass('selected')
     @public = true
 
   makePrivate: ->
+    @privateButton.addClass('selected')
+    @publicButton.removeClass('selected')
     @public = false
 
   showGistForm: ->
