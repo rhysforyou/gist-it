@@ -79,7 +79,6 @@ class GistView extends View
 
 
   makePublic: ->
-    debugger
     @publicButton.addClass('selected')
     @privateButton.removeClass('selected')
     @public = true
