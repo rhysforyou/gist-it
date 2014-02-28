@@ -4,6 +4,8 @@ Quickly and easily post the contents of the current editor to GitHub Gists. Just
 type ⌥⌘G, type in a description and hit return, the Gist will be uploaded and
 its URL will be copied to your system clipboard.
 
+![](https://raw.github.com/rpowelll/gist-it/master/media/screencast.gif)
+
 ## Using Your GitHub Account
 
 Gist It will post gists anonymously by default, to post to your own GitHub
