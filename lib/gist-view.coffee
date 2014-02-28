@@ -25,7 +25,6 @@ class GistView extends View
 
   initialize: (serializeState) ->
     @handleEvents()
-    @public = true
     atom.workspaceView.command "gist:gist-current-file", => @toggle()
 
   # Returns an object that can be retrieved when package is activated
@@ -47,10 +46,16 @@ class GistView extends View
       @detach()
     else
       @showGistForm()
+
       atom.workspaceView.append(this)
+
+      if atom.config.get('gist-it.newGistsDefaultToPrivate')
+        @makePrivate()
+      else
+        @makePublic()
+
       @descriptionEditor.setText ""
       @descriptionEditor.focus()
-      @makePublic()
 
   gistIt: ->
     @showProgressIndicator()
