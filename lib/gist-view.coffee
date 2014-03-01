@@ -78,6 +78,8 @@ class GistView extends View
     @showGistForm()
     atom.workspaceView.append(this)
 
+    @descriptionEditor.focus()
+
   gistIt: ->
     @showProgressIndicator()
 
@@ -104,7 +106,6 @@ class GistView extends View
   showGistForm: ->
     if @gist.isPublic then @makePublic() else @makePrivate()
     @descriptionEditor.setText @gist.description
-    @descriptionEditor.focus()
 
     @toolbar.show()
     @signupForm.show()
