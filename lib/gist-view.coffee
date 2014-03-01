@@ -9,7 +9,7 @@ class GistView extends View
     @div class: "gist overlay from-top padded", =>
       @div class: "inset-panel", =>
         @div class: "panel-heading", =>
-          @span "Gist Current File"
+          @span outlet: "title"
           @div class: "btn-toolbar pull-right", outlet: 'toolbar', =>
             @div class: "btn-group", =>
               @button outlet: "privateButton", class: "btn", "Private"
@@ -52,6 +52,7 @@ class GistView extends View
     @gist.files[activeEditor.getTitle()] =
       content: activeEditor.getText()
 
+    @title.text "Gist Current File"
     @presentSelf()
 
   gistSelection: ->
@@ -61,6 +62,7 @@ class GistView extends View
     @gist.files[activeEditor.getTitle()] =
       content: activeEditor.getSelectedText()
 
+    @title.text "Gist Selection"
     @presentSelf()
 
   gistOpenBuffers: ->
@@ -69,8 +71,7 @@ class GistView extends View
     for editor in atom.workspace.getEditors()
       @gist.files[editor.getTitle()] = content: editor.getText()
 
-    debugger
-
+    @title.text "Gist Open Buffers"
     @presentSelf()
 
   presentSelf: ->
