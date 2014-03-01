@@ -116,7 +116,7 @@ class GistView extends View
 
     # Use the user's token if we have one
     if (atom.config.get("gist-it.userToken"))
-      options.headers["Authorization"] = "token " + atom.config.get("gist-it.userToken")
+      options.headers["Authorization"] = "token #{atom.config.get('gist-it.userToken')}"
 
     request = https.request options, (res) ->
       res.setEncoding "utf8"
