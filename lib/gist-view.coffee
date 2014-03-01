@@ -1,6 +1,5 @@
 {EditorView, View} = require 'atom'
 Clipboard = require 'clipboard'
-https = require 'https'
 
 Gist = require './gist-model'
 
@@ -55,24 +54,16 @@ class GistView extends View
     atom.workspaceView.append(this)
 
     if @gist.isPrivate then @makePrivate() else @makePublic()
+    @descriptionEditor.setText @gist.description
 
-    @descriptionEditor.setText ""
     @descriptionEditor.focus()
 
   gistIt: ->
     @showProgressIndicator()
 
-    parameters =
-      description: @descriptionEditor.getText()
-      public: @gist.public
-      files: @gist.files
+    @gist.description = @descriptionEditor.getText()
 
-    activeEditor = atom.workspaceView.getActivePaneItem()
-
-    parameters.files[activeEditor.getTitle()] =
-      content: activeEditor.getText()
-
-    @postGist parameters, (response) =>
+    @gist.post (response) =>
       Clipboard.writeText response.html_url
       @showUrlDisplay()
       setTimeout (=>
@@ -107,28 +98,3 @@ class GistView extends View
     @signupForm.hide()
     @urlDisplay.show()
     @progressIndicator.hide()
-
-  postGist: (parameters, callback) ->
-    options =
-      hostname: 'api.github.com'
-      path: '/gists'
-      method: 'POST'
-      headers:
-        "User-Agent": "Atom"
-
-    # Use the user's token if we have one
-    if (atom.config.get("gist-it.userToken"))
-      options.headers["Authorization"] = "token #{atom.config.get('gist-it.userToken')}"
-
-    request = https.request options, (res) ->
-      res.setEncoding "utf8"
-      body = ''
-      res.on "data", (chunk) ->
-        body += chunk
-      res.on "end", ->
-        response = JSON.parse(body)
-        callback(response)
-
-    request.write(JSON.stringify(parameters))
-
-    request.end()
