@@ -28,6 +28,7 @@ class GistView extends View
     @handleEvents()
     @gist = null
     atom.workspaceView.command "gist:gist-current-file", => @gistCurrentFile()
+    atom.workspaceView.command "gist:gist-selection", => @gistSelection()
 
   # Returns an object that can be retrieved when package is activated
   serialize: ->
@@ -50,13 +51,20 @@ class GistView extends View
     @gist.files[activeEditor.getTitle()] =
       content: activeEditor.getText()
 
+    @presentSelf()
+
+  gistSelection: ->
+    @gist = new Gist()
+
+    activeEditor = atom.workspaceView.getActivePaneItem()
+    @gist.files[activeEditor.getTitle()] =
+      content: activeEditor.getSelectedText()
+
+    @presentSelf()
+
+  presentSelf: ->
     @showGistForm()
     atom.workspaceView.append(this)
-
-    if @gist.isPrivate then @makePrivate() else @makePublic()
-    @descriptionEditor.setText @gist.description
-
-    @descriptionEditor.focus()
 
   gistIt: ->
     @showProgressIndicator()
@@ -82,6 +90,10 @@ class GistView extends View
     @gist.isPublic = false
 
   showGistForm: ->
+    if @gist.isPrivate then @makePrivate() else @makePublic()
+    @descriptionEditor.setText @gist.description
+    @descriptionEditor.focus()
+
     @toolbar.show()
     @signupForm.show()
     @urlDisplay.hide()

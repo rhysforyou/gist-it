@@ -1,15 +1,11 @@
-# See https://atom.io/docs/latest/creating-a-package#menus for more details
-'context-menu':
-  '.overlayer':
-      'Enable gist': 'gist:toggle'
-
 'menu': [
   {
     'label': 'Packages'
     'submenu': [
       'label': 'Gist It'
       'submenu': [
-        { 'label': 'Gist Current File', 'command': 'gist:toggle' }
+        { 'label': 'Gist Current File', 'command': 'gist:gist-current-file' }
+        { 'label': 'Gist Selection', 'command': 'gist:gist-selection' }
       ]
     ]
   }
