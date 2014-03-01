@@ -102,7 +102,7 @@ class GistView extends View
     @gist.isPublic = false
 
   showGistForm: ->
-    if @gist.isPrivate then @makePrivate() else @makePublic()
+    if @gist.isPublic then @makePublic() else @makePrivate()
     @descriptionEditor.setText @gist.description
     @descriptionEditor.focus()
 
