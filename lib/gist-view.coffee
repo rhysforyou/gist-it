@@ -27,7 +27,7 @@ class GistView extends View
   initialize: (serializeState) ->
     @handleEvents()
     @gist = null
-    atom.workspaceView.command "gist:gist-current-file", => @toggle()
+    atom.workspaceView.command "gist:gist-current-file", => @gistCurrentFile()
 
   # Returns an object that can be retrieved when package is activated
   serialize: ->
@@ -43,7 +43,7 @@ class GistView extends View
     @descriptionEditor.on 'core:confirm', => @gistIt()
     @descriptionEditor.on 'core:cancel', => @detach()
 
-  toggle: ->
+  gistCurrentFile: ->
     @gist = new Gist()
 
     activeEditor = atom.workspaceView.getActivePaneItem()
