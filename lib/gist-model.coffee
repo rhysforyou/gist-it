@@ -25,6 +25,7 @@ class Gist
       res.on "data", (chunk) ->
         body += chunk
       res.on "end", ->
+        debugger
         response = JSON.parse(body)
         callback(response)
 

@@ -27,8 +27,9 @@ class GistView extends View
   initialize: (serializeState) ->
     @handleEvents()
     @gist = null
-    atom.workspaceView.command "gist:gist-current-file", => @gistCurrentFile()
-    atom.workspaceView.command "gist:gist-selection", => @gistSelection()
+    atom.workspaceView.command "gist-it:gist-current-file", => @gistCurrentFile()
+    atom.workspaceView.command "gist-it:gist-selection", => @gistSelection()
+    atom.workspaceView.command "gist-it:gist-open-buffers", => @gistOpenBuffers()
 
   # Returns an object that can be retrieved when package is activated
   serialize: ->
@@ -47,7 +48,7 @@ class GistView extends View
   gistCurrentFile: ->
     @gist = new Gist()
 
-    activeEditor = atom.workspaceView.getActivePaneItem()
+    activeEditor = atom.workspace.getActiveEditor()
     @gist.files[activeEditor.getTitle()] =
       content: activeEditor.getText()
 
@@ -56,9 +57,19 @@ class GistView extends View
   gistSelection: ->
     @gist = new Gist()
 
-    activeEditor = atom.workspaceView.getActivePaneItem()
+    activeEditor = atom.workspace.getActiveEditor()
     @gist.files[activeEditor.getTitle()] =
       content: activeEditor.getSelectedText()
+
+    @presentSelf()
+
+  gistOpenBuffers: ->
+    @gist = new Gist()
+
+    for editor in atom.workspace.getEditors()
+      @gist.files[editor.getTitle()] = content: editor.getText()
+
+    debugger
 
     @presentSelf()
 

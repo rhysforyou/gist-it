@@ -5,8 +5,9 @@
   "private": true,
   "description": "Quickly and easily share your code on gist.github.com",
   "activationEvents": [
-    "gist:gist-current-file",
-    "gist:gist-selection"
+    "gist-it:gist-current-file",
+    "gist-it:gist-selection",
+    "gist-it:gist-open-buffers"
   ],
   "repository": "https://github.com/rpowelll/gist-it",
   "license": "MIT",
