@@ -2,6 +2,8 @@
 Clipboard = require 'clipboard'
 https = require 'https'
 
+Gist = require './gist-model'
+
 module.exports =
 class GistView extends View
   @content: ->
@@ -25,6 +27,7 @@ class GistView extends View
 
   initialize: (serializeState) ->
     @handleEvents()
+    @gist = null
     atom.workspaceView.command "gist:gist-current-file", => @toggle()
 
   # Returns an object that can be retrieved when package is activated
@@ -42,28 +45,27 @@ class GistView extends View
     @descriptionEditor.on 'core:cancel', => @detach()
 
   toggle: ->
-    if @hasParent()
-      @detach()
-    else
-      @showGistForm()
+    @gist = new Gist()
 
-      atom.workspaceView.append(this)
+    activeEditor = atom.workspaceView.getActivePaneItem()
+    @gist.files[activeEditor.getTitle()] =
+      content: activeEditor.getText()
 
-      if atom.config.get('gist-it.newGistsDefaultToPrivate')
-        @makePrivate()
-      else
-        @makePublic()
+    @showGistForm()
+    atom.workspaceView.append(this)
 
-      @descriptionEditor.setText ""
-      @descriptionEditor.focus()
+    if @gist.isPrivate then @makePrivate() else @makePublic()
+
+    @descriptionEditor.setText ""
+    @descriptionEditor.focus()
 
   gistIt: ->
     @showProgressIndicator()
 
     parameters =
       description: @descriptionEditor.getText()
-      public: @public
-      files: {}
+      public: @gist.public
+      files: @gist.files
 
     activeEditor = atom.workspaceView.getActivePaneItem()
 
@@ -81,12 +83,12 @@ class GistView extends View
   makePublic: ->
     @publicButton.addClass('selected')
     @privateButton.removeClass('selected')
-    @public = true
+    @gist.isPublic = true
 
   makePrivate: ->
     @privateButton.addClass('selected')
     @publicButton.removeClass('selected')
-    @public = false
+    @gist.isPublic = false
 
   showGistForm: ->
     @toolbar.show()
