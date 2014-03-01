@@ -1,16 +1,8 @@
 # Gist It
 
-Quickly and easily post the contents of the current editor to GitHub Gists. Just
-type ⌥⌘G, type in a description and hit return, the Gist will be uploaded and
-its URL will be copied to your system clipboard.
+Quickly and easily post files from Atom to GitHub Gists.
 
 ![](https://raw.github.com/rpowelll/gist-it/master/media/screencast.gif)
-
-## Using Your GitHub Account
-
-Gist It will post gists anonymously by default, to post to your own GitHub
-account [generate a new token](https://github.com/settings/tokens/new) with the
-`gists` scope and copy it into the package's preferences.
 
 ## Commands
 
@@ -21,6 +13,12 @@ account [generate a new token](https://github.com/settings/tokens/new) with the
 
 - **Gist Open Buffers** Creates a gist with the content of all buffers in the active
   workspace
+
+## Using Your GitHub Account
+
+Gist It will post gists anonymously by default, to post to your own GitHub
+account [generate a new token](https://github.com/settings/tokens/new) with the
+`gists` scope and copy it into the package's preferences.
 
 ## Preferences
 
