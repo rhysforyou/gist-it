@@ -24,7 +24,7 @@ if you have trouble finding these).
 ## Preferences
 
 To configure your preferences for Gist It, open the Atom preferences with
-<kbd>⌘</kbd> <kbd>;</kbd> and select 'Gist It' from the sidebar. From there
+<kbd>⌘;</kbd> and select 'Gist It' from the sidebar. From there
 you can modify a variety of settings:
 
 - **New Gists Default To Private (Boolean)** By default, new gists will be
