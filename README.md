@@ -18,11 +18,14 @@ Quickly and easily post files from Atom to GitHub Gists.
 
 Gist It will post gists anonymously by default, to post to your own GitHub
 account [generate a new token](https://github.com/settings/tokens/new) with the
-`gists` scope and copy it into the package's preferences.
+`gists` scope and copy it into the package's preferences (see the section below
+if you have trouble finding these).
 
 ## Preferences
 
-From the package's page in Atom's settings, you can set a few preferences:
+To configure your preferences for Gist It, open the Atom preferences with
+<kbd>⌘</kbd> <kbd>;</kbd> and select 'Gist It' from the sidebar. From there
+you can modify a variety of settings:
 
 - **New Gists Default To Private (Boolean)** By default, new gists will be
   _public_. you can change this option manually when creating the gist, or
