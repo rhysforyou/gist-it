@@ -1,4 +1,6 @@
+fs = require 'fs'
 https = require 'https'
+path = require 'path'
 
 module.exports =
 class Gist
@@ -6,6 +8,18 @@ class Gist
       @isPublic = !atom.config.get('gist-it.newGistsDefaultToPrivate')
       @files = {}
       @description = ""
+
+  getSecretTokenPath: ->
+    path.join(atom.getConfigDirPath(), "gist-it.token")
+
+  getToken: ->
+    if not @token?
+      config = atom.config.get("gist-it.userToken")
+      @token = if config? and config.toString().length > 0
+                 config
+               else if fs.existsSync(@getSecretTokenPath())
+                 fs.readFileSync(@getSecretTokenPath())
+    @token
 
   post: (callback) ->
     options =
@@ -16,8 +30,8 @@ class Gist
         "User-Agent": "Atom"
 
     # Use the user's token if we have one
-    if (atom.config.get("gist-it.userToken"))
-      options.headers["Authorization"] = "token #{atom.config.get('gist-it.userToken')}"
+    if @getToken()?
+      options.headers["Authorization"] = "token #{@getToken()}"
 
     request = https.request options, (res) ->
       res.setEncoding "utf8"
