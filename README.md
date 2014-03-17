@@ -21,6 +21,11 @@ account [generate a new token](https://github.com/settings/tokens/new) with the
 `gists` scope and copy it into the package's preferences (see the section below
 if you have trouble finding these).
 
+If you keep your Atom configuration in a public repo, or otherwise don't want
+your token to reside in the main user config, you can instead put it in
+`~/.atom/gist-it.token`. You can then add this file to a `.gitignore` file to
+keep it out of public repos.
+
 ## Preferences
 
 To configure your preferences for Gist It, open the Atom preferences with
