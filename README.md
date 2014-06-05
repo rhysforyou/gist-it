@@ -40,3 +40,10 @@ you can modify a variety of settings:
   OAuth token to have Gists attributed to their GitHub account. A token can be
   created [here](https://github.com/settings/tokens/new) and must include the
   `gist` scope.
+
+- **GitHub Enterprise Host (String)** Configure the hostname of a GitHub enterprise
+  instance where Gists should be created.
+
+- **Use Http (Boolean)** By default, all requests are made to the GitHub API over HTTPS.
+  Setting this option allows communicating with an enterprise instance that is only
+  served over HTTP.

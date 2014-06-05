@@ -13,7 +13,7 @@ class Gist
       @files = {}
       @description = ""
 
-      # GitHub Enterprise Support
+      # GitHub Enterprise Support https://enterprise.github.com/help/articles/using-the-api
       if atom.config.get('gist-it.gitHubEnterpriseHost')
         @hostname = atom.config.get('gist-it.gitHubEnterpriseHost')
         @path = '/api/v3/gists'
