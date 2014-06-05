@@ -15,3 +15,5 @@ module.exports =
   configDefaults:
     userToken: ""
     newGistsDefaultToPrivate: false
+    gitHubEnterpriseHost: ""
+    useHttp: false

@@ -1,5 +1,9 @@
 fs = require 'fs'
-https = require 'https'
+# Enterprise hosts may be served on a protocol other than HTTPS
+if atom.config.get('gist-it.gitHubEnterpriseHost') and atom.config.get('gist-it.useHttp')
+    protocol = require 'http'
+else
+    protocol = require 'https'
 path = require 'path'
 
 module.exports =
@@ -8,6 +12,14 @@ class Gist
       @isPublic = !atom.config.get('gist-it.newGistsDefaultToPrivate')
       @files = {}
       @description = ""
+
+      # GitHub Enterprise Support
+      if atom.config.get('gist-it.gitHubEnterpriseHost')
+        @hostname = atom.config.get('gist-it.gitHubEnterpriseHost')
+        @path = '/api/v3/gists'
+      else
+        @hostname = 'api.github.com'
+        @path = '/gists'
 
   getSecretTokenPath: ->
     path.join(atom.getConfigDirPath(), "gist-it.token")
@@ -23,8 +35,8 @@ class Gist
 
   post: (callback) ->
     options =
-      hostname: 'api.github.com'
-      path: '/gists'
+      hostname: @hostname
+      path: @path
       method: 'POST'
       headers:
         "User-Agent": "Atom"
@@ -33,7 +45,7 @@ class Gist
     if @getToken()?
       options.headers["Authorization"] = "token #{@getToken()}"
 
-    request = https.request options, (res) ->
+    request = protocol.request options, (res) ->
       res.setEncoding "utf8"
       body = ''
       res.on "data", (chunk) ->
