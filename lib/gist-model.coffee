@@ -23,11 +23,17 @@ class Gist
 
   post: (callback) ->
     options =
-      hostname: 'api.github.com'
-      path: '/gists'
       method: 'POST'
       headers:
         "User-Agent": "Atom"
+
+    # GitHub Enterprise Support
+    if atom.config.get('gist-it.gitHubEnterpriseHost')
+      hostname = atom.config.get('gist-it.gitHubEnterpriseHost')
+      path = '/api/v3/gists'
+    else
+      hostname: 'api.github.com'
+      path: '/gists'
 
     # Use the user's token if we have one
     if @getToken()?
