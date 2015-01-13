@@ -12,14 +12,15 @@ class GistView extends View
           @span outlet: "title"
           @div class: "btn-toolbar pull-right", outlet: 'toolbar', =>
             @div class: "btn-group", =>
-              @button outlet: "privateButton", class: "btn", "Private"
+              @button outlet: "privateButton", class: "btn", "Secret"
               @button outlet: "publicButton", class: "btn", "Public"
         @div class: "panel-body padded", =>
           @div outlet: 'signupForm', =>
             @subview 'descriptionEditor', new EditorView(mini:true, placeholderText: 'Description')
-            @div class: 'pull-right', =>
-              @button outlet: 'cancelButton', class: 'btn', "Cancel"
-              @button outlet: 'gistButton', class: 'btn btn-primary', "Gist It"
+            @div class: 'block pull-right', =>
+              @button outlet: 'cancelButton', class: 'btn inline-block-tight', "Cancel"
+              @button outlet: 'gistButton', class: 'btn btn-primary inline-block-tight', "Gist It"
+            @div class: 'clearfix'
           @div outlet: 'progressIndicator', =>
             @span class: 'loading loading-spinner-medium'
           @div outlet: 'urlDisplay', =>
