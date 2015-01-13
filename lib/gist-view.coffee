@@ -18,6 +18,7 @@ class GistView extends View
           @div outlet: 'signupForm', =>
             @subview 'descriptionEditor', new EditorView(mini:true, placeholderText: 'Description')
             @div class: 'pull-right', =>
+              @button outlet: 'cancelButton', class: 'btn', "Cancel"
               @button outlet: 'gistButton', class: 'btn btn-primary', "Gist It"
           @div outlet: 'progressIndicator', =>
             @span class: 'loading loading-spinner-medium'
@@ -40,6 +41,7 @@ class GistView extends View
 
   handleEvents: ->
     @gistButton.on 'click', => @gistIt()
+    @cancelButton.on 'click', => @detach()
     @publicButton.on 'click', => @makePublic()
     @privateButton.on 'click', => @makePrivate()
     @descriptionEditor.on 'core:confirm', => @gistIt()
