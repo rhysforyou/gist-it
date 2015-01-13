@@ -4,11 +4,14 @@
   "version": "0.5.0",
   "private": true,
   "description": "Quickly and easily share your code on gist.github.com",
-  "activationEvents": [
-    "gist-it:gist-current-file",
-    "gist-it:gist-selection",
-    "gist-it:gist-open-buffers"
-  ],
+  "activationCommands": {
+    "atom-workspace": [
+      "settings-view:open",
+      "gist-it:gist-current-file",
+      "gist-it:gist-selection",
+      "gist-it:gist-open-buffers"
+    ]
+  },
   "repository": "https://github.com/rpowelll/gist-it",
   "license": "MIT",
   "engines": {
