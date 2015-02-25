@@ -7,6 +7,6 @@
 
 # For more detailed documentation see
 # https://atom.io/docs/latest/advanced/keymaps
-'.atom-text-editor:not(.mini)':
+'atom-text-editor:not([mini])':
   'alt-cmd-g': 'gist-it:gist-current-file'
   'shift-alt-cmd-g': 'gist-it:gist-selection'
