@@ -29,9 +29,9 @@ class GistView extends View
   initialize: (serializeState) ->
     @handleEvents()
     @gist = null
-    atom.workspaceView.command "gist-it:gist-current-file", => @gistCurrentFile()
-    atom.workspaceView.command "gist-it:gist-selection", => @gistSelection()
-    atom.workspaceView.command "gist-it:gist-open-buffers", => @gistOpenBuffers()
+    atom.views.getView(atom.workspace).command "gist-it:gist-current-file", => @gistCurrentFile()
+    atom.views.getView(atom.workspace).command "gist-it:gist-selection", => @gistSelection()
+    atom.views.getView(atom.workspace).command "gist-it:gist-open-buffers", => @gistOpenBuffers()
 
   # Returns an object that can be retrieved when package is activated
   serialize: ->
