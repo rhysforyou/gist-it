@@ -1,7 +1,7 @@
 {
   "name": "gist-it",
   "main": "./lib/gist-it",
-  "version": "0.6.8",
+  "version": "0.6.9",
   "private": true,
   "description": "Quickly and easily share your code on gist.github.com",
   "activationCommands": {
