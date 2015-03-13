@@ -1,6 +1,6 @@
 {
   "name": "gist-it",
-  "main": "./lib/gist",
+  "main": "./lib/gist-it",
   "version": "0.6.6",
   "private": true,
   "description": "Quickly and easily share your code on gist.github.com",
