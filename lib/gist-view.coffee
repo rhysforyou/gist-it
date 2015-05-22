@@ -54,7 +54,7 @@ class GistView extends View
   gistCurrentFile: ->
     @gist = new Gist()
 
-    activeEditor = atom.workspace.getActiveEditor()
+    activeEditor = atom.workspace.getActiveTextEditor()
     @gist.files[activeEditor.getTitle()] =
       content: activeEditor.getText()
 
@@ -64,7 +64,7 @@ class GistView extends View
   gistSelection: ->
     @gist = new Gist()
 
-    activeEditor = atom.workspace.getActiveEditor()
+    activeEditor = atom.workspace.getActiveTextEditor()
     @gist.files[activeEditor.getTitle()] =
       content: activeEditor.getSelectedText()
 
@@ -74,7 +74,7 @@ class GistView extends View
   gistOpenBuffers: ->
     @gist = new Gist()
 
-    for editor in atom.workspace.getEditors()
+    for editor in atom.workspace.getTextEditors()
       @gist.files[editor.getTitle()] = content: editor.getText()
 
     @title.text "Gist Open Buffers"
