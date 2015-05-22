@@ -1,5 +1,6 @@
 {TextEditorView, View} = require 'atom-space-pen-views'
 Clipboard = require 'clipboard'
+{CompositeDisposable} = require 'atom'
 
 Gist = require './gist-model'
 
@@ -15,8 +16,8 @@ class GistView extends View
               @button outlet: "privateButton", class: "btn", "Secret"
               @button outlet: "publicButton", class: "btn", "Public"
         @div class: "panel-body padded", =>
-          @div outlet: 'signupForm', =>
-            @subview 'descriptionEditor', new TextEditorView(mini:true, placeholderText: 'Description')
+          @div outlet: 'gistForm', class: 'gist-form', =>
+            @subview 'descriptionEditor', new TextEditorView(mini: true, placeholder: 'Gist Description')
             @div class: 'block pull-right', =>
               @button outlet: 'cancelButton', class: 'btn inline-block-tight', "Cancel"
               @button outlet: 'gistButton', class: 'btn btn-primary inline-block-tight', "Gist It"
@@ -41,6 +42,7 @@ class GistView extends View
 
   # Tear down any state and detach
   destroy: ->
+    @disposables.dispose()
     @detach()
 
   handleEvents: ->
@@ -48,8 +50,11 @@ class GistView extends View
     @cancelButton.on 'click', => @destroy()
     @publicButton.on 'click', => @makePublic()
     @privateButton.on 'click', => @makePrivate()
-    @descriptionEditor.on 'core:confirm', => @gistIt()
-    @descriptionEditor.on 'core:cancel', => @destroy()
+
+    @disposables = new CompositeDisposable
+    @disposables.add atom.commands.add '.gist-form atom-text-editor',
+      'core:confirm': => @gistIt()
+      'core:cancel': => @destroy()
 
   gistCurrentFile: ->
     @gist = new Gist()
@@ -114,18 +119,18 @@ class GistView extends View
     @descriptionEditor.setText @gist.description
 
     @toolbar.show()
-    @signupForm.show()
+    @gistForm.show()
     @urlDisplay.hide()
     @progressIndicator.hide()
 
   showProgressIndicator: ->
     @toolbar.hide()
-    @signupForm.hide()
+    @gistForm.hide()
     @urlDisplay.hide()
     @progressIndicator.show()
 
   showUrlDisplay: ->
     @toolbar.hide()
-    @signupForm.hide()
+    @gistForm.hide()
     @urlDisplay.show()
     @progressIndicator.hide()
