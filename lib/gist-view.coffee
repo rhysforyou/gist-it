@@ -82,7 +82,7 @@ class GistView extends View
 
   presentSelf: ->
     @showGistForm()
-    atom.workspaceView.append(this)
+    atom.workspace.addTopPanel(item: this)
 
     @descriptionEditor.focus()
 
