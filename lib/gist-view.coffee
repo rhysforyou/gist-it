@@ -1,5 +1,4 @@
 {TextEditorView, View} = require 'atom-space-pen-views'
-Clipboard = require 'clipboard'
 {CompositeDisposable} = require 'atom'
 
 Gist = require './gist-model'
@@ -107,7 +106,7 @@ class GistView extends View
     @gist.description = @descriptionEditor.getText()
 
     @gist.post (response) =>
-      Clipboard.writeText response.html_url
+      atom.clipboard.write response.html_url
       @showUrlDisplay()
       setTimeout (=>
         @destroy()
