@@ -107,7 +107,6 @@ class GistView extends View
     @gist.description = @descriptionEditor.getText()
 
     @gist.post (response) =>
-      console.log(response)
       atom.clipboard.write response.html_url
 
       if atom.config.get('gist-it.openAfterCreate')
