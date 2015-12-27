@@ -67,33 +67,58 @@ class GistView extends View
       @descriptionEditor.focus()
 
   gistCurrentFile: ->
-    @gist = new Gist()
-
     activeEditor = atom.workspace.getActiveTextEditor()
-    @gist.files[activeEditor.getTitle()] =
-      content: activeEditor.getText()
+    fileContent = activeEditor.getText()
 
-    @title.text "Gist Current File"
-    @presentSelf()
+    if !!(fileContent.trim())
+      @gist = new Gist()
+
+      @gist.files[activeEditor.getTitle()] =
+        content: fileContent
+
+      @title.text "Gist Current File"
+      @presentSelf()
+
+    else
+      atom.notifications.addError('Gist could not be created: The current file is empty.')
 
   gistSelection: ->
-    @gist = new Gist()
-
     activeEditor = atom.workspace.getActiveTextEditor()
-    @gist.files[activeEditor.getTitle()] =
-      content: activeEditor.getSelectedText()
+    selectedText = activeEditor.getSelectedText()
 
-    @title.text "Gist Selection"
-    @presentSelf()
+    if !!(selectedText.trim())
+      @gist = new Gist()
+
+      @gist.files[activeEditor.getTitle()] =
+        content: selectedText
+
+      @title.text "Gist Selection"
+      @presentSelf()
+    else
+      atom.notifications.addError('Gist could not be created: The current selection is empty.')
 
   gistOpenBuffers: ->
+    skippedEmptyBuffers = false
+    skippedAllBuffers = true
     @gist = new Gist()
 
     for editor in atom.workspace.getTextEditors()
-      @gist.files[editor.getTitle()] = content: editor.getText()
+      editorText = editor.getText()
+      if !!(editorText.trim())
+        @gist.files[editor.getTitle()] = content: editorText
+        skippedAllBuffers = false
+      else
+        skippedEmptyBuffers = true
 
-    @title.text "Gist Open Buffers"
-    @presentSelf()
+    if !skippedAllBuffers
+      @title.text "Gist Open Buffers"
+      @presentSelf()
+    else
+      atom.notifications.addError('Gist could not be created: No open buffers with content.')
+      return
+
+    if skippedEmptyBuffers
+      atom.notifications.addWarning('Some empty buffers will not be added to the Gist.')
 
   presentSelf: ->
     @showGistForm()
