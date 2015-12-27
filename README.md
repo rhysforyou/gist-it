@@ -47,3 +47,6 @@ you can modify a variety of settings:
 - **Use Http (Boolean)** By default, all requests are made to the GitHub API over HTTPS.
   Setting this option allows communicating with an enterprise instance that is only
   served over HTTP.
+
+- **Open new Gist after create** If this option is set, new Gists will be opened
+in the default web browser immediately after they have been created.

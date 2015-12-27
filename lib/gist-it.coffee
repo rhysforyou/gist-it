@@ -33,3 +33,8 @@ module.exports =
       description: 'Enable if your GitHub Enterprise instance is only available via HTTP, not HTTPS.'
       type: 'boolean'
       default: false
+    openAfterCreate:
+      title: 'Open new Gist after create'
+      description: 'Automatically open newly created Gists in the default web browser.'
+      type: 'boolean'
+      default: false

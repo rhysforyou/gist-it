@@ -2,6 +2,7 @@
 {CompositeDisposable} = require 'atom'
 
 Gist = require './gist-model'
+shell = require 'shell'
 
 module.exports =
 class GistView extends View
@@ -107,6 +108,10 @@ class GistView extends View
 
     @gist.post (response) =>
       atom.clipboard.write response.html_url
+
+      if atom.config.get('gist-it.openAfterCreate')
+        shell.openExternal(response.html_url)
+
       @showUrlDisplay()
       setTimeout (=>
         @destroy()
